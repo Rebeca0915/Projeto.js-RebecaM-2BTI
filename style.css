@@ -1,0 +1,32 @@
+body {
+    font-family: Arial;
+    padding: 20px;
+}
+
+#mensagem-erro {
+    color: red;
+}
+
+li {
+    margin: 5px 0;
+}
+
+#controles {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+#limpar {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#limpar:hover { opacity: 0.9 }
+
+li span { cursor: pointer }
