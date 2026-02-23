@@ -3,8 +3,12 @@ const input = document.querySelector("#input-tarefa");
 const erro = document.querySelector("#mensagem-erro");
 const listaMensagens = document.querySelector("#lista-tarefas");
 
+
 let listaTarefas = []; // cada item: { text: string }
+
 let editandoIndex = null;
+
+const contadorEl = document.querySelector("#contador");
 const btnLimpar = document.querySelector("#limpar");
 
 // carregar do localStorage
@@ -44,17 +48,18 @@ function validarTexto(texto) {
   return "";
 }
 
-// Renderizar lista
+//Renderizando/mostrando a lista na tela
 function render() {
   listaMensagens.innerHTML = "";
 
+  //<li> para cada mensagem
   for (let i = 0; i < listaTarefas.length; i++) {
     const item = listaTarefas[i];
     const li = document.createElement("li");
 
     const span = document.createElement("span");
     span.textContent = item.text;
-
+    // capture o índice atual para os handlers
     const indexAtual = i;
 
     span.addEventListener("click", () => {
@@ -78,6 +83,10 @@ function render() {
     li.append(span, btnExcluir);
     listaMensagens.append(li);
   }
+
+  // atualizar contador
+  const total = listaTarefas.length;
+  contadorEl.textContent = `${total} tarefa${total !== 1 ? "s" : ""}`;
 }
 
 form.addEventListener("submit", (event) => {
