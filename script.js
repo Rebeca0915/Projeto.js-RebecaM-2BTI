@@ -60,7 +60,7 @@ function render() {
 
     const span = document.createElement("span");
     span.textContent = item.text;
-    if (item.done) span.style.textDecoration = "line-through";
+  if (item.done) span.classList.add("concluida");
 
     // capture o índice atual para os handlers
     const indexAtual = i;
@@ -83,7 +83,7 @@ function render() {
       render();
     });
 
-    li.append(checkbox, " ", span, " ", btnExcluir);
+  li.append(checkbox, span, btnExcluir);
     listaMensagens.append(li);
   }
 
