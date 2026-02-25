@@ -32,6 +32,11 @@ function validarTexto(texto) {
   if (txt === "") {
     return "Digite algo antes de enviar";
   }
+  // atualizar contador (se existir no DOM)
+  if (contadorEl) {
+    const total = listaTarefas.length;
+    contadorEl.textContent = `${total} tarefa${total !== 1 ? 's' : ''}`;
+  }
 
   if (txt.length < 3) {
     return "Mínimo de 3 caracteres";
@@ -49,18 +54,9 @@ function render() {
     const item = listaTarefas[i];
     const li = document.createElement("li");
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = !!item.done;
-    checkbox.addEventListener("change", () => {
-      item.done = checkbox.checked;
-      salvar();
-      render();
-    });
-
     const span = document.createElement("span");
     span.textContent = item.text;
-    if (item.done) span.style.textDecoration = "line-through";
+    // não mostra mais o estado 'feito'
 
     // capture o índice atual para os handlers
     const indexAtual = i;
@@ -83,15 +79,12 @@ function render() {
       render();
     });
 
-    li.append(checkbox, " ", span, " ", btnExcluir);
+  li.append(span, " ", btnExcluir);
     listaMensagens.append(li);
   }
 
-  // atualizar contador
-  const total = listaTarefas.length;
-  const feitas = listaTarefas.filter((t) => t.done).length;
-  contadorEl.textContent = `${total} tarefa${total !== 1 ? "s" : ""} (${feitas} concluída${feitas !== 1 ? "s" : ""})`;
 }
+
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -132,4 +125,3 @@ btnLimpar.addEventListener("click", () => {
 // inicialização
 carregar();
 render();
-
